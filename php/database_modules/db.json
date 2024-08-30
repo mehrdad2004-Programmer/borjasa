@@ -1,0 +1,20 @@
+{
+  "DATABASE": {
+    "host": "localhost",
+    "username": "root",
+    "password": "",
+    "dbname": "mandegar"
+  },
+  "TABLES": {
+    "neighbors": {
+      "id": "INTEGER PRIMARY KEY AUTO_INCREMENT",
+      "fname": "VARCHAR(200)",
+      "lname": "VARCHAR(30)",
+      "id_no": "VARCHAR(10)",
+      "phone_no": "VARCHAR(11)",
+      "home_phone": "VARCHAR(8)",
+      "username": "VARCHAR(15) UNIQUE",
+      "password": "VARCHAR(255)"
+    }
+  }
+}
