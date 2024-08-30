@@ -38,24 +38,11 @@
                 $query .= "(" . rtrim($columns, ",") . ")" . " VALUES " . "(" . rtrim($data, ',') . ")";
 
                 if($this->conn->prepare($query)->execute()){
-                    http_response_code(201);
-                    return array(
-                        "is_created" => true,
-                        "status_code" => 201,
-                    );
+                    return true;
                 }
-                return array(
-                    "is_created" => false,
-                    "status_code" => 403,
-                );
-
+                return false;
             }catch (Exception $e){
-                echo $e;
-                return array(
-                    "is_created" => false,
-                    "status_code" => 500,
-                    "error_log" => $e,
-                );
+                return $e;
             }
         }
 
@@ -82,7 +69,7 @@
             }
         }
 
-        public function update(string $table_name, array $arr, array $val){
+        public function update(string $table_name, array $arr, array $val = []){
             try{
                 $query = "UPDATE $table_name SET ";
                 $col = "";
@@ -90,23 +77,57 @@
                 foreach(array_keys($arr) as $key) {
                     $col .= $key . " = " . "'" . $arr[$key] . "'" . ",";
                 }
-
-                foreach (array_keys($val) as $key){
-
-                }
                 $query .= rtrim($col, ",");
-                echo $query;
+                if(count($val) > 0){
+                    $query .= " WHERE ";
+                    foreach (array_keys($val) as $key){
+                        $value .= $key . " = " . "'" . $val[$key] . "'" . " AND ";
+                    }
+                    $query .= rtrim($value, " ADN ");
+                }
+
+                if($this->conn->prepare($query)->execute()){
+                    return true;
+                }
+                return false;
             }catch (Exception $e){
-                echo $e;
+                return $e;
             }
         }
 
-        public function delete(array $arr){
-
+        public function delete(string $table_name, array $val = []){
+            try{
+                $query = "DELETE FROM $table_name";
+                if(count($val) > 0){
+                    $query .= " WHERE ";
+                    foreach (array_keys($val) as $key){
+                        $query .= $key . " = " . "'" . $val[$key] . "'" . " AND ";
+                    }
+                }
+                if($this->conn->prepare(rtrim($query, " AND "))->execute()){
+                    return true;
+                }
+                return false;
+            }catch (Exception $e){
+                return $e;
+            }
         }
 
-        public function CreateTable(){
+        public function CreateTable(string $table_name, array $col){
+            try{
+                $query = "CREATE TABLE IF NOT EXISTS $table_name (";
+                foreach (array_keys($col) as $key){
+                    $query .= $key . " " . $col[$key] . ",";
+                }
 
+                $query =rtrim($query, ",") . ")";
+                if($this->conn->prepare($query)->execute()){
+                    return true;
+                }
+                return false;
+            }catch (Exception $e){
+                return true;
+            }
         }
 
 
@@ -125,6 +146,5 @@
 
 $res = $db->read('test');
 
-$res = $db->update("test", ["test" => "problem"]);
-
-print_r($res);
+//$res = $db->update("test", ["test" => "problem"], ['test' => "ahmad"]);
+$db->CreateTable('test1', ["id" => "INTEGER PRIMARY KEY AUTO_INCREMENT"]);
