@@ -1,0 +1,17 @@
+/*defining vazir font*/
+@font-face {
+    font-family: 'vazir';
+    src: url("../font/vazir.ttf");
+}
+
+/*defining titr font*/
+@font-face {
+    font-family: 'titr';
+    src: url("../font/titr.ttf");
+}
+
+/*defining amir font*/
+@font-face {
+    font-family: 'amir';
+    src: url("../font/amir.ttf");
+}

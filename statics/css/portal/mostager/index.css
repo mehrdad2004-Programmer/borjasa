@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    direction : rtl;
+}
+
+.text-right{
+    direction : rtl !important;
+    text-align: right !important;
+}
+
+.notification{
+    height : 300px;
+}
+
+table, td, th{
+    text-align: center;
+    vertical-align: middle;
+}

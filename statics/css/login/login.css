@@ -1,0 +1,41 @@
+:root{
+    --login-background-image : "../images/login/hong-kong-apartment-block.jpg";
+}
+
+
+html, body{
+    height: 100%;
+}
+
+body{
+    background-image: url("../../images/login/hong-kong-apartment-block.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.login-box{
+    border: 2px white solid;
+    height: 60%;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.78);
+    position: relative;
+}
+
+input[type='text'], input[type='password']{
+    height: 40px;
+    width: 300px;
+}
+
+div.login-box > div.footer{
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%);
+    width: 100%;
+}

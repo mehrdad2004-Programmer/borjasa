@@ -1,0 +1,12 @@
+/*include login properties*/
+@import url("font/fonts.css");
+@import url("login/login.css");
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
