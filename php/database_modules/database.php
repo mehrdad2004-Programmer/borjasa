@@ -6,25 +6,30 @@
 
     require_once "../exceptions/exception.php";
     class Database{
-        private $conn;
+        public $conn;
         public function __construct(){
             try{
                 //to connect to database and create your table please visit db.json file and config
                 $info = json_decode(file_get_contents(__DIR__."/db.json"), true)['DATABASE'];
-                print_r($info);
+                //print_r($info);
                 $host = $info['host'];
                 $username = $info['username'];
                 $password = $info['password'];
                 $db_name = $info['dbname'];
                 $this->conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
-                echo "connected...";
+                //echo "connected...";
             }catch(Exception $e){
                 switch ($e->getCode()){
                     case 1049:
                         $this->conn = new PDO("mysql:host=$host;charset=utf8", $username, $password);
                         $query = "CREATE DATABASE " . $db_name;
                         $this->conn->prepare($query)->execute();
+                        // Re-attempt to connect to the database
+                        $this->conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
+                        echo "connected to newly created database...";
                         break;
+                    default:
+                        throw $e;
                 }
             }
         }
