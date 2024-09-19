@@ -1,8 +1,10 @@
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     direction : rtl;
+    font-family: 'vazir';
 }
 
 .text-right{
@@ -17,4 +19,5 @@
 table, td, th{
     text-align: center;
     vertical-align: middle;
+    white-space: nowrap;
 }
